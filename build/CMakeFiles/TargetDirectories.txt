@@ -1,3 +1,0 @@
-/home/wenchen/FFT-BenchMark/build/CMakeFiles/rebuild_cache.dir
-/home/wenchen/FFT-BenchMark/build/CMakeFiles/edit_cache.dir
-/home/wenchen/FFT-BenchMark/build/CMakeFiles/Benchmark.dir

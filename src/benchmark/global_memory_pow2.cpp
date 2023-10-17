@@ -6,7 +6,7 @@
 
 #define ELEMENT_PER_THREAD 4
 #define COL 64
-#define ROW (16384 * 16)
+#define ROW (65536)
 
 #define COL_THREAD (COL / ELEMENT_PER_THREAD)
 #define BLOCK_ROW_LENGTH 8
