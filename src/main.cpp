@@ -16,8 +16,8 @@ int main() {
 
     // test_global_memory_pow2(device, queue, context);
     // test_global_memory_pow3(device, queue, context);
-    // test_global_memory_pow3_with_branch(device, queue, context);
-    register_spill(device, queue, context);
+    test_global_memory_pow3_with_branch(device, queue, context);
+    // register_spill(device, queue, context);
 
     clReleaseCommandQueue(queue);
     clReleaseContext(context);

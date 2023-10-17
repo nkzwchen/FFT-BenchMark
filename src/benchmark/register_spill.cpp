@@ -67,7 +67,7 @@ void register_spill(cl_device_id& device,  cl_command_queue& que, cl_context& co
     clSetKernelArg(kernel, 0, sizeof(cl_mem), input_mem);
     MoveBufferFromCpuToGpu(que, input_mem, cpu_input, 1, fft_length * batch);
     double run_time = 1.0;
-    run_time = ExecuteKernel(que, kernel, global_work_size, local_work_size, 10);
+    run_time = ExecuteKernel(que, kernel, global_work_size, local_work_size, 1);
 
     double mem_size = ((double)sizeof(float) * fft_length * batch * 4) / 1024.0 / 1024.0 / 1024.0;
 

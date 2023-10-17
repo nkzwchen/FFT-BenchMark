@@ -111,6 +111,7 @@ double ExecuteKernel(cl_command_queue& que, cl_kernel& kernel, size_t* global_wo
         if (err != CL_SUCCESS)
         {
             printf("Error: Failed to execute kernel!\n");
+            checkError(err, "clEnqueueNDRangeKernel");
             return 0;
         }
 
@@ -139,9 +140,13 @@ double ExecuteKernel(cl_command_queue& que, cl_kernel& kernel, size_t* global_wo
         }
 
         total_time += time_end - time_start;
+        double cur_time = (time_end - time_start) / 1000.0 / 1000.0;
+        printf("run time is %lf ms\n", cur_time);
     }
     // double wall_time = wall_end - wall_start;
-    return total_time / 1000.0 / 1000.0 / test_cnt;
+    double ret_time = total_time / 1000.0 / 1000.0 / test_cnt;
+
+    return ret_time;
 
 }
 

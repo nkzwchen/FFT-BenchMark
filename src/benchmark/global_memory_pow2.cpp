@@ -5,9 +5,13 @@
 #include "fft_util.hpp"
 
 #define ELEMENT_PER_THREAD 4
+#define COL 64
+#define ROW (16384 * 16)
+
+#define COL_THREAD (COL / ELEMENT_PER_THREAD)
 #define BLOCK_ROW_LENGTH 8
-#define COL 256
-#define ROW 2048
+
+
 
 #define FFT_LENGTH (ROW * COL)
 #define THREAD_PER_BLOCK ((COL * BLOCK_ROW_LENGTH) / ELEMENT_PER_THREAD)
@@ -91,7 +95,7 @@ void test_global_memory_pow2(cl_device_id& device,  cl_command_queue& que, cl_co
     clSetKernelArg(kernel, 0, sizeof(cl_mem), input_mem);
     clSetKernelArg(kernel, 1, sizeof(cl_mem), output_mem);
     MoveBufferFromCpuToGpu(que, input_mem, cpu_input, 1, fft_length * batch);
-    double run_time = ExecuteKernel(que, kernel, global_work_size, local_work_size, 10);
+    double run_time = ExecuteKernel(que, kernel, global_work_size, local_work_size, 1);
     MoveBufferFromGpuToCpu(que, output_mem, cpu_output, 1, fft_length * batch);
 
     double mem_size = ((double)sizeof(float) * fft_length * batch * 4) / 1024.0 / 1024.0 / 1024.0;

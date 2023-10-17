@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wenchen/FFT-BenchMark/src/benchmark/benchmark.hpp
+CL/cl.h
+-
+
+/home/wenchen/FFT-BenchMark/src/fft_util.hpp
+cstdlib
+-
+cmath
+-
+sys/time.h
+-
+time.h
+-
+cstdio
+-
+CL/cl.h
+-
+
+/home/wenchen/FFT-BenchMark/src/main.cpp
+CL/cl.h
+-
+stdio.h
+-
+fft_util.hpp
+/home/wenchen/FFT-BenchMark/src/fft_util.hpp
+util.hpp
+/home/wenchen/FFT-BenchMark/src/util.hpp
+benchmark/benchmark.hpp
+/home/wenchen/FFT-BenchMark/src/benchmark/benchmark.hpp
+
+/home/wenchen/FFT-BenchMark/src/util.hpp
+CL/cl.h
+-
+string
+-
+
