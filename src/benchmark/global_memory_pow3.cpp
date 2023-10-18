@@ -7,7 +7,7 @@
 #define ELEMENT_PER_THREAD 3
 #define BLOCK_ROW_LENGTH 9
 #define COL 81
-#define ROW 81
+#define ROW (2187)
 
 #define FFT_LENGTH (ROW * COL)
 #define THREAD_PER_BLOCK ((COL * BLOCK_ROW_LENGTH) / ELEMENT_PER_THREAD)

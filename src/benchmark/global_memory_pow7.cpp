@@ -4,10 +4,10 @@
 #include "util.hpp"
 #include "fft_util.hpp"
 
-#define ELEMENT_PER_THREAD 3
-#define BLOCK_ROW_LENGTH 9
-#define COL 81
-#define ROW (243 * 8)
+#define ELEMENT_PER_THREAD 7
+#define BLOCK_ROW_LENGTH 49
+#define COL 49
+#define ROW (2187)
 
 #define FFT_LENGTH (ROW * COL)
 #define THREAD_PER_BLOCK ((COL * BLOCK_ROW_LENGTH) / ELEMENT_PER_THREAD)
@@ -19,7 +19,7 @@
 
 
 
-void test_global_memory_pow3_with_branch(cl_device_id& device,  cl_command_queue& que, cl_context& context){
+void test_global_memory_pow7(cl_device_id& device,  cl_command_queue& que, cl_context& context){
     size_t fft_length = FFT_LENGTH;
     size_t batch = 1;
     if (fft_length < 2048 * 2048)
@@ -39,7 +39,7 @@ void test_global_memory_pow3_with_branch(cl_device_id& device,  cl_command_queue
     "#define STRIDE " + std::to_string(STRIDE) + "\n";
 
     // 读取并编译Kernel
-    char* source_code = ReadKernelSource("../src/kernels/global_memory_pow3_with_branch.cl", macro_definitions_str);
+    char* source_code = ReadKernelSource("../src/kernels/global_memory_pow7.cl", macro_definitions_str);
 
     // printf("marco definition:\n %s\n", macro_definitions_str.c_str());
 
@@ -57,7 +57,7 @@ void test_global_memory_pow3_with_branch(cl_device_id& device,  cl_command_queue
 
     // 创建Kernel
     cl_int ret;
-    cl_kernel kernel = clCreateKernel(program, "global_memory_pow3_with_branch", &ret);
+    cl_kernel kernel = clCreateKernel(program, "global_memory_pow7", &ret);
 
     if(ret != CL_SUCCESS) {
         fprintf(stderr, "Failed to create kernel.\n");
