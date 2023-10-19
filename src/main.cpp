@@ -14,11 +14,7 @@ int main() {
     cl_command_queue queue = CreateCommandQueue(context, device);
     printf("OpenCL Init Success\n");
 
-    // test_global_memory_pow2(device, queue, context);
-    test_global_memory_pow3(device, queue, context);
-    // test_global_memory_pow7(device,  queue, context);
-    // test_global_memory_pow3_with_branch(device, queue, context);
-    // register_spill(device, queue, context);
+    global_memory_test(device, queue, context);
 
     clReleaseCommandQueue(queue);
     clReleaseContext(context);

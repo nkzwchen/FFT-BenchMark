@@ -6,11 +6,7 @@ find_package(OpenCL REQUIRED)
 
 # 设定源代码文件和kernel文件的变量
 set(SOURCE_FILES src/main.cpp src/fft_util.cpp src/util.cpp 
-                 src/benchmark/global_memory_pow2.cpp 
-                 src/benchmark/global_memory_pow3.cpp 
-                 src/benchmark/global_memory_pow3_with_branch.cpp 
-                 src/benchmark/global_memory_pow7.cpp
-                 src/benchmark/register_spill.cpp)
+                 src/benchmark/global_memory_test.cpp)
                  
 set(HEAD_FILES src/fft_util.hpp src/util.hpp src/benchmark/benchmark.hpp) 
 

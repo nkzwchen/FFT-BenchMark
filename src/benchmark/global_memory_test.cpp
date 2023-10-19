@@ -6,10 +6,11 @@
 
 #define ELEMENT_PER_THREAD 4
 #define COL 64
-#define ROW (65536)
+
+#define BLOCK_ROW_LENGTH 8
+#define ROW (27 * 512)
 
 #define COL_THREAD (COL / ELEMENT_PER_THREAD)
-#define BLOCK_ROW_LENGTH 8
 
 
 
@@ -23,7 +24,7 @@
 
 
 
-void test_global_memory_pow2(cl_device_id& device,  cl_command_queue& que, cl_context& context){
+void global_memory_test(cl_device_id& device,  cl_command_queue& que, cl_context& context){
     size_t fft_length = FFT_LENGTH;
     size_t batch = 1;
     if (fft_length < 2048 * 2048)
@@ -43,7 +44,7 @@ void test_global_memory_pow2(cl_device_id& device,  cl_command_queue& que, cl_co
     "#define STRIDE " + std::to_string(STRIDE) + "\n";
 
     // 读取并编译Kernel
-    char* source_code = ReadKernelSource("../src/kernels/global_memory_pow2.cl", macro_definitions_str);
+    char* source_code = ReadKernelSource("../src/kernels/global_memory_test.cl", macro_definitions_str);
 
     // printf("marco definition:\n %s\n", macro_definitions_str.c_str());
 
@@ -61,7 +62,7 @@ void test_global_memory_pow2(cl_device_id& device,  cl_command_queue& que, cl_co
 
     // 创建Kernel
     cl_int ret;
-    cl_kernel kernel = clCreateKernel(program, "global_memory_pow2", &ret);
+    cl_kernel kernel = clCreateKernel(program, "global_memory_test", &ret);
 
     if(ret != CL_SUCCESS) {
         fprintf(stderr, "Failed to create kernel.\n");
@@ -89,8 +90,11 @@ void test_global_memory_pow2(cl_device_id& device,  cl_command_queue& que, cl_co
 
     GenerateRandomData(cpu_input, 1, batch, fft_length);
 
-    size_t global_work_size[3] = {THREAD_NUM, batch, 1};
-    size_t local_work_size[3] = {THREAD_PER_BLOCK, 1, 1};
+    size_t row_thread = ROW;
+    size_t col_thread = (COL / ELEMENT_PER_THREAD);
+
+    size_t global_work_size[3] = {row_thread , col_thread, batch};
+    size_t local_work_size[3] = {BLOCK_ROW_LENGTH, col_thread, 1};
 
     clSetKernelArg(kernel, 0, sizeof(cl_mem), input_mem);
     clSetKernelArg(kernel, 1, sizeof(cl_mem), output_mem);
