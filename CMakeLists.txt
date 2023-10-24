@@ -10,7 +10,9 @@ set(SOURCE_FILES src/main.cpp src/fft_util.cpp src/util.cpp
                  src/benchmark/global_memory_pow3.cpp 
                  src/benchmark/global_memory_pow3_with_branch.cpp 
                  src/benchmark/global_memory_pow7.cpp
-                 src/benchmark/register_spill.cpp)
+                 src/benchmark/register_spill.cpp
+                 src/benchmark/fft_2187_test.cpp
+                 src/benchmark/fft_2187_test_no_compute.cpp)
                  
 set(HEAD_FILES src/fft_util.hpp src/util.hpp src/benchmark/benchmark.hpp) 
 

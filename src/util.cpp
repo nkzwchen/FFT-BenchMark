@@ -87,7 +87,7 @@ cl_program BuildProgram(cl_context context, cl_device_id device_id, const char* 
         fprintf(stderr, "Failed to create CL program from source.\n");
         exit(1);
     }
-    ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+    ret = clBuildProgram(program, 1, &device_id, "-cl-unsafe-math-optimizations", NULL, NULL);
     if(ret != CL_SUCCESS) {
         size_t log_size;
         clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, 0, NULL, &log_size);
