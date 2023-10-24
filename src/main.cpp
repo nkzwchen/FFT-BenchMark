@@ -14,8 +14,9 @@ int main() {
     cl_command_queue queue = CreateCommandQueue(context, device);
     printf("OpenCL Init Success\n");
 
-    // fft_2187_test(device, queue, context);
     fft_2187_test_no_compute(device, queue, context);
+    fft_2187_test_no_twiddle(device, queue, context);
+    fft_2187_test(device, queue, context);
     clReleaseCommandQueue(queue);
     clReleaseContext(context);
     return 0;
