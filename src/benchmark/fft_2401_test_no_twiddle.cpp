@@ -4,9 +4,9 @@
 #include "util.hpp"
 #include "fft_util.hpp"
 
-#define ELEMENT_PER_THREAD 9
+#define ELEMENT_PER_THREAD 49
 #define BLOCK_ROW_LENGTH 1
-#define COL 2187
+#define COL 2401
 #define ROW 1
 
 #define FFT_LENGTH (ROW * COL)
@@ -17,12 +17,12 @@
 
 
 
-void fft_2187_test_no_compute(cl_device_id& device,  cl_command_queue& que, cl_context& context){
+void fft_2401_test_no_twiddle(cl_device_id& device,  cl_command_queue& que, cl_context& context){
     size_t fft_length = FFT_LENGTH;
-    size_t batch = 512;    
+    size_t batch = 256;    
 
     // 读取并编译Kernel
-    char* source_code = ReadKernelSource("../src/kernels/fft_2187_test_no_compute.cl");
+    char* source_code = ReadKernelSource("../src/kernels/fft_2401_test_no_twiddle.cl");
 
     // printf("marco definition:\n %s\n", macro_definitions_str.c_str());
 
@@ -40,7 +40,7 @@ void fft_2187_test_no_compute(cl_device_id& device,  cl_command_queue& que, cl_c
 
     // 创建Kernel
     cl_int ret;
-    cl_kernel kernel = clCreateKernel(program, "fft_2187_test_no_compute", &ret);
+    cl_kernel kernel = clCreateKernel(program, "fft_2401_test_no_twiddle", &ret);
 
     if(ret != CL_SUCCESS) {
         fprintf(stderr, "Failed to create kernel.\n");
