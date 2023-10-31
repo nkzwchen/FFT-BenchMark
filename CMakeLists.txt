@@ -14,7 +14,8 @@ set(SOURCE_FILES src/main.cpp src/fft_util.cpp src/util.cpp
                  src/benchmark/fft_2401_test_only_io.cpp
                  src/benchmark/fft_2401_test_no_compute.cpp
                  src/benchmark/fft_2401_test_no_twiddle.cpp
-                 src/benchmark/fft_2401_test.cpp)
+                 src/benchmark/fft_2401_test.cpp
+                 src/benchmark/fft_2401_read_by_col.cpp)
                  
 set(HEAD_FILES src/fft_util.hpp src/util.hpp src/benchmark/benchmark.hpp) 
 

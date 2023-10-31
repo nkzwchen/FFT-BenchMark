@@ -9,3 +9,4 @@ void fft_2401_test(cl_device_id& device,  cl_command_queue& que, cl_context& con
 void fft_2401_test_no_compute(cl_device_id& device,  cl_command_queue& que, cl_context& context);
 void fft_2401_test_no_twiddle(cl_device_id& device,  cl_command_queue& que, cl_context& context);
 void fft_2401_test_only_io(cl_device_id& device,  cl_command_queue& que, cl_context& context);
+void fft_2401_read_by_col(cl_device_id& device,  cl_command_queue& que, cl_context& context);

@@ -1,6 +1,5 @@
 #define DIRECTION 1
 
-
 __kernel __attribute__((always_inline))
 void micro_pass_0(__private uint rw, __private uint lid, __global float2* src, __local float2* dest)
 {
