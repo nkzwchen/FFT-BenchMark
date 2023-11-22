@@ -7,12 +7,10 @@
 #define ELEMENT_PER_THREAD 4
 #define COL 64
 
-#define BLOCK_ROW_LENGTH 8
-#define ROW (27 * 512)
+#define BLOCK_ROW_LENGTH 16
+#define ROW (16384)
 
 #define COL_THREAD (COL / ELEMENT_PER_THREAD)
-
-
 
 #define FFT_LENGTH (ROW * COL)
 #define THREAD_PER_BLOCK ((COL * BLOCK_ROW_LENGTH) / ELEMENT_PER_THREAD)
@@ -22,13 +20,9 @@
 #define STRIDE ((COL / ELEMENT_PER_THREAD) * ROW)
 
 
-
-
-void global_memory_test(cl_device_id& device,  cl_command_queue& que, cl_context& context){
+void ddr_test_1(cl_device_id& device,  cl_command_queue& que, cl_context& context){
     size_t fft_length = FFT_LENGTH;
-    size_t batch = 1;
-    if (fft_length < 2048 * 2048)
-        batch = 2048 * 2048 / fft_length;
+    size_t batch = 8;
     
 
     std::string macro_definitions_str =
@@ -44,7 +38,7 @@ void global_memory_test(cl_device_id& device,  cl_command_queue& que, cl_context
     "#define STRIDE " + std::to_string(STRIDE) + "\n";
 
     // 读取并编译Kernel
-    char* source_code = ReadKernelSource("../src/kernels/global_memory_test.cl", macro_definitions_str);
+    char* source_code = ReadKernelSource("../src/kernels/ddr_test_1.cl", macro_definitions_str);
 
     // printf("marco definition:\n %s\n", macro_definitions_str.c_str());
 
@@ -62,7 +56,7 @@ void global_memory_test(cl_device_id& device,  cl_command_queue& que, cl_context
 
     // 创建Kernel
     cl_int ret;
-    cl_kernel kernel = clCreateKernel(program, "global_memory_test", &ret);
+    cl_kernel kernel = clCreateKernel(program, "ddr_test", &ret);
 
     if(ret != CL_SUCCESS) {
         fprintf(stderr, "Failed to create kernel.\n");
